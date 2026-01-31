@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+  <!-- Primary SEO -->
+  <title>E-Liquid Mischrechner – Nikotin verdünnen (mg/ml → ml Base)</title>
+  <meta name="description" content="E-Liquid Mischrechner: Verdünne Nikotin (z.B. 20→6 mg/ml) und berechne exakt ml Liquid + ml Base. Presets: 60/100/120/200 ml." />
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="color-scheme" content="light dark" />
+
+  <!-- GitHub Pages absolute base -->
+  <link rel="canonical" href="https://4rjn.github.io/eliquid/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="🧪E-Liquid Mischrechner💨" />
+  <meta property="og:locale" content="de_DE" />
+  <meta property="og:title" content="🧪E-Liquid Mischrechner – Nikotin verdünnen (mg/ml → ml)💨" />
+  <meta property="og:description" content="⌛️Schnell & 🎯präzise: Mischverhältnis berechnen (z.B. 20→6 mg/ml) – Presets: 60/100/120/200 ml.💨" />
+  <!-- OG Image: ABSOLUTE URL -->
+  <meta property="og:image" content="https://4rjn.github.io/eliquid/og/eliquid-mischrechner-1200x630.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://4rjn.github.io/eliquid/" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="E-Liquid Mischrechner – Nikotin verdünnen" />
+  <meta name="twitter:description" content="Mischverhältnis in Sekunden berechnen – Presets: 60/100/120/200 ml." />
+  <meta name="twitter:image" content="https://4rjn.github.io/eliquid/og/eliquid-mischrechner-1200x630.png" />
+
+  <!-- Icons -->
+  <link rel="icon" href="./favicon.ico" sizes="any" />
+  <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="./assets/icons/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="icon" href="./assets/icons/favicon-16.png" type="image/png" sizes="16x16" />
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.svg" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #0b1220;
+      --card: rgba(255,255,255,.06);
+      --border: rgba(255,255,255,.16);
+      --muted: rgba(255,255,255,.72);
+      --text: rgba(255,255,255,.92);
+      --accent: #7dd3fc;
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
+      --r: 16px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root{
+        --bg: #f6f7fb;
+        --card: rgba(0,0,0,.04);
+        --border: rgba(0,0,0,.12);
+        --muted: rgba(0,0,0,.66);
+        --text: rgba(0,0,0,.88);
+        --shadow: 0 12px 40px rgba(0,0,0,.12);
+        --accent: #0284c7;
+      }
+    }
+    * { box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 800px at 20% -10%, rgba(125,211,252,.22), transparent 60%),
+        radial-gradient(900px 700px at 80% 0%, rgba(34,211,238,.18), transparent 55%),
+        radial-gradient(800px 700px at 50% 110%, rgba(99,102,241,.12), transparent 60%),
+        var(--bg);
+      color: var(--text);
+    }
+    .wrap{ max-width: 900px; margin: 0 auto; padding: 22px; }
+    .hero{ display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-bottom:14px; }
+    .title{ display:flex; flex-direction:column; gap:4px; }
+    h1{ margin:0; font-size:18px; letter-spacing:.2px; }
+    .sub{ margin:0; color: var(--muted); font-size:13px; }
+    .badge{
+      font-size:12px;
+      padding:7px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+    }
+    .card{
+      border:1px solid var(--border);
+      background: var(--card);
+      border-radius: var(--r);
+      padding:16px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:10px; }
+    @media (max-width: 760px){ .grid{ grid-template-columns: 1fr; } }
+    label{ display:block; font-size:12px; color: var(--muted); margin-bottom:6px; }
+    input{
+      width:100%;
+      padding:11px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      outline: none;
+    }
+    input:focus{ border-color: rgba(125,211,252,.55); box-shadow: 0 0 0 3px rgba(125,211,252,.14); }
+    .split{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:12px; }
+    @media (max-width: 760px){ .split{ grid-template-columns: 1fr; } }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:12px; }
+    .presetBtns{ display:flex; gap:8px; flex-wrap:wrap; }
+    button{
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      cursor:pointer;
+      transition: transform .05s ease, border-color .2s ease, background .2s ease;
+      user-select:none;
+    }
+    button:hover{ border-color: rgba(125,211,252,.6); background: rgba(125,211,252,.08); }
+    button:active{ transform: translateY(1px); }
+    .out{
+      margin-top:14px;
+      padding:12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.14);
+    }
+    @media (prefers-color-scheme: light){ .out{ background: rgba(255,255,255,.55); } }
+    .mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+    .err{ margin-top:10px; color:#ff4d4d; font-weight:800; display:none; }
+    .fine{ margin-top:10px; font-size:12px; color: var(--muted); }
+    .hint{ font-size:12px; color: var(--muted); }
+    .copyRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; align-items:center; }
+    .pill{
+      padding:7px 10px;
+      border:1px dashed var(--border);
+      border-radius:999px;
+      font-size:12px;
+      color: var(--muted);
+      display:none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="title">
+        <h1>E-Liquid Mischrechner</h1>
+        <p class="sub">Nikotin verdünnen: mg/ml → ml starkes Liquid + ml Base</p>
+      </div>
+      <div class="badge">Presets: 60 · 100 · 120 · 200 ml</div>
+    </div>
+
+    <div class="card">
+      <div class="grid">
+        <div>
+          <label for="src">Ausgangsstärke (mg/ml) – „starkes Liquid“</label>
+          <input id="src" type="number" step="0.1" value="20" min="0" inputmode="decimal" />
+        </div>
+        <div>
+          <label for="target">Zielstärke (mg/ml)</label>
+          <input id="target" type="number" step="0.1" value="6" min="0" inputmode="decimal" />
+        </div>
+        <div>
+          <label for="base">Base-Stärke (mg/ml) – meist 0</label>
+          <input id="base" type="number" step="0.1" value="0" min="0" inputmode="decimal" />
+        </div>
+        <div>
+          <label for="total">Gesamtmenge (ml)</label>
+          <input id="total" type="number" step="0.1" value="120" min="0" inputmode="decimal" />
+        </div>
+      </div>
+
+      <div class="split">
+        <div>
+          <div class="hint">Schnell-Presets Gesamtmenge</div>
+          <div class="row presetBtns" style="margin-top:8px;">
+            <button type="button" data-total="60">60 ml</button>
+            <button type="button" data-total="100">100 ml</button>
+            <button type="button" data-total="120">120 ml</button>
+            <button type="button" data-total="200">200 ml</button>
+          </div>
+          <div class="fine">Enter = berechnen</div>
+        </div>
+
+        <div>
+          <div class="hint">Aktionen</div>
+          <div class="row" style="margin-top:8px;">
+            <button id="calcBtn" type="button">Berechnen</button>
+            <button id="resetBtn" type="button">Reset (20 → 6 bei 120 ml)</button>
+            <button id="swapBtn" type="button" title="Tauscht Base & Liquid (optional)">Swap</button>
+          </div>
+          <div class="copyRow">
+            <button id="copyBtn" type="button">Ergebnis kopieren</button>
+            <span id="copied" class="pill">Kopiert ✅</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="error" class="err"></div>
+
+      <div id="out" class="out" style="display:none;">
+        <div><strong>Ergebnis</strong></div>
+        <div class="mono" id="outMain" style="margin-top:10px; white-space:pre-line;"></div>
+        <div class="mono" id="outRatio" style="margin-top:10px; white-space:pre-line;"></div>
+        <div class="fine">Formel: Ziel = (src·Vsrc + base·Vbase) / Gesamt, Vbase = Gesamt − Vsrc</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const el = (id) => document.getElementById(id);
+    const round2 = (n) => Math.round(n * 100) / 100;
+
+    function showErr(msg){
+      el('error').textContent = msg;
+      el('error').style.display = 'block';
+      el('out').style.display = 'none';
+    }
+    function clearErr(){
+      el('error').style.display = 'none';
+      el('error').textContent = '';
+    }
+
+    function calc(){
+      clearErr();
+
+      const src = Number(el('src').value);
+      const target = Number(el('target').value);
+      const base = Number(el('base').value);
+      const total = Number(el('total').value);
+
+      if (![src,target,base,total].every(Number.isFinite)) return showErr("Bitte nur gültige Zahlen eingeben.");
+      if (total <= 0) return showErr("Gesamtmenge muss > 0 ml sein.");
+      if (src < 0 || target < 0 || base < 0) return showErr("Werte dürfen nicht negativ sein.");
+      if (src === base) return showErr("Ausgangsstärke und Base-Stärke dürfen nicht gleich sein.");
+
+      const min = Math.min(src, base);
+      const max = Math.max(src, base);
+      if (target < min || target > max) return showErr(`Zielstärke muss zwischen ${min} und ${max} mg/ml liegen.`);
+
+      // Vsrc = (target - base) * total / (src - base)
+      const Vsrc = ((target - base) * total) / (src - base);
+      const Vbase = total - Vsrc;
+
+      if (!Number.isFinite(Vsrc) || !Number.isFinite(Vbase)) return showErr("Rechnung fehlgeschlagen – prüfe deine Werte.");
+      if (Vsrc < 0 || Vbase < 0) return showErr("Mit diesen Werten entsteht eine negative Menge – Ziel nicht erreichbar.");
+
+      const partsBase = Vbase / Vsrc;
+
+      el('outMain').textContent =
+        `${round2(Vsrc)} ml starkes Liquid (${src} mg/ml)\n` +
+        `+ ${round2(Vbase)} ml Base (${base} mg/ml)\n` +
+        `= ${round2(total)} ml bei ca. ${round2(target)} mg/ml`;
+
+      el('outRatio').textContent =
+        `Verhältnis (Liquid : Base): 1 : ${round2(partsBase)}\n` +
+        `Anteile: ${round2((Vsrc/total)*100)}% Liquid / ${round2((Vbase/total)*100)}% Base`;
+
+      el('out').style.display = 'block';
+      return { src, target, base, total, Vsrc, Vbase, partsBase };
+    }
+
+    function resetDefault(){
+      el('src').value = 20;
+      el('target').value = 6;
+      el('base').value = 0;
+      el('total').value = 120;
+      calc();
+    }
+
+    async function copyResult(){
+      const r = calc();
+      if (!r) return;
+
+      const text =
+        `E-Liquid Mischrechner\n` +
+        `Ausgang: ${r.src} mg/ml | Base: ${r.base} mg/ml | Ziel: ${r.target} mg/ml | Gesamt: ${r.total} ml\n` +
+        `=> ${round2(r.Vsrc)} ml Liquid + ${round2(r.Vbase)} ml Base\n` +
+        `Verhältnis: 1 : ${round2(r.partsBase)} (Liquid : Base)`;
+
+      try {
+        await navigator.clipboard.writeText(text);
+        el('copied').style.display = 'inline-block';
+        setTimeout(() => el('copied').style.display = 'none', 1200);
+      } catch {
+        showErr("Clipboard blockiert. Kopiere den Text manuell aus dem Ergebnis.");
+      }
+    }
+
+    el('calcBtn').addEventListener('click', calc);
+    el('resetBtn').addEventListener('click', resetDefault);
+    el('swapBtn').addEventListener('click', () => {
+      const a = el('src').value;
+      el('src').value = el('base').value;
+      el('base').value = a;
+      calc();
+    });
+    el('copyBtn').addEventListener('click', copyResult);
+
+    document.querySelectorAll('button[data-total]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        el('total').value = btn.getAttribute('data-total');
+        calc();
+      });
+    });
+
+    document.addEventListener('keydown', (e) => { if (e.key === 'Enter') calc(); });
+
+    calc();
+  </script>
+</body>
+</html>
